@@ -1,5 +1,3 @@
-#@title Code - Load dependencies
-
 #general
 import io
 
@@ -29,8 +27,6 @@ training_df.head(200)
 
 print('Total number of rows: {0}\n\n'.format(len(training_df.index)))
 training_df.describe(include='all')
-
-#@title Double-click or run to view answers about dataset statistics
 
 answer = '''
 What is the maximum fare? 				              Answer: $159.25
@@ -63,8 +59,6 @@ print("Are any features missing data? \t\t\t\tAnswer:", "No" if missing_values =
 #@title Code - View correlation matrix
 training_df.corr(numeric_only = True)
 
-#@title Double-click to view answers about the correlation matrix
-
 # Which feature correlates most strongly to the label FARE?
 # ---------------------------------------------------------
 answer = '''
@@ -81,10 +75,8 @@ print(answer)
 answer = '''The feature with the weakest correlation to the FARE is TIP_RATE.'''
 print(answer)
 
-#@title Code - View pairplot
 sns.pairplot(training_df, x_vars=["FARE", "TRIP_MILES", "TRIP_SECONDS"], y_vars=["FARE", "TRIP_MILES", "TRIP_SECONDS"])
 
-#@title Define plotting functions
 
 def make_plots(df, feature_names, label_name, model_output, sample_size=200):
 
@@ -179,19 +171,13 @@ def model_info(feature_names, label_name, model_output):
 
 print("SUCCESS: defining plotting functions complete.")
 
-#@title Code - Define ML functions
 
 def build_model(my_learning_rate, num_features):
-  """Create and compile a simple linear regression model."""
-  # Describe the topography of the model.
-  # The topography of a simple linear regression model
-  # is a single node in a single layer.
+
   inputs = keras.Input(shape=(num_features,))
   outputs = keras.layers.Dense(units=1)(inputs)
   model = keras.Model(inputs=inputs, outputs=outputs)
 
-  # Compile the model topography into code that Keras can efficiently
-  # execute. Configure training to minimize the model's mean squared error.
   model.compile(optimizer=keras.optimizers.RMSprop(learning_rate=my_learning_rate),
                 loss="mean_squared_error",
                 metrics=[keras.metrics.RootMeanSquaredError()])
@@ -202,8 +188,6 @@ def build_model(my_learning_rate, num_features):
 def train_model(model, features, label, epochs, batch_size):
   """Train the model by feeding it data."""
 
-  # Feed the model the feature and the label.
-  # The model will train for the specified number of epochs.
   history = model.fit(x=features,
                       y=label,
                       batch_size=batch_size,
@@ -259,9 +243,6 @@ label = 'FARE'
 
 model_1 = run_experiment(training_df, features, label, learning_rate, epochs, batch_size)
 
-#@title Double-click to view answers for training model with one feature
-
-# How many epochs did it take to converge on the final model?
 # -----------------------------------------------------------------------------
 answer = """
 Use the loss curve to see where the loss begins to level off during training.
@@ -276,7 +257,6 @@ it takes about 5 epochs for the training run to converge to the final model.
 """
 print(answer)
 
-# How well does the model fit the sample data?
 # -----------------------------------------------------------------------------
 answer = '''
 It appears from the model plot that the model fits the sample data fairly well.

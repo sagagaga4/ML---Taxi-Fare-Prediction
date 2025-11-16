@@ -1,4 +1,4 @@
-## 🚕 Taxi Fare Prediction 📊
+## Taxi Fare Prediction 
 A machine learning project exploring linear regression to predict taxi fares based on various trip characteristics. This project is part of a Google ML Crash Course exercise.
 
 ## ✨ Features
